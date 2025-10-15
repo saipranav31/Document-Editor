@@ -5,6 +5,13 @@ import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import TextAlign from '@tiptap/extension-text-align'
 import Link from '@tiptap/extension-link'
+import TextStyle from '@tiptap/extension-text-style'
+import Color from '@tiptap/extension-color'
+import BulletList from '@tiptap/extension-bullet-list'
+import OrderedList from '@tiptap/extension-ordered-list'
+import ListItem from '@tiptap/extension-list-item'
+import Blockquote from '@tiptap/extension-blockquote'
+import CodeBlock from '@tiptap/extension-code-block'
 import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket'
 import Collaboration from '@tiptap/extension-collaboration'
@@ -34,12 +41,19 @@ function App() {
             Underline,
             Link.configure({ openOnClick: true }),
             TextAlign.configure({ types: ['heading', 'paragraph'] }),
+            TextStyle,
+            Color,
+            BulletList,
+            OrderedList,
+            ListItem,
+            Blockquote,
+            CodeBlock,
             Collaboration.configure({ document: ydoc }) as any
           ],
           editorProps: { attributes: { class: 'editor' } }
         }
       : {
-          extensions: [StarterKit, Underline, Link, TextAlign],
+          extensions: [StarterKit, Underline, Link, TextAlign, TextStyle, Color, BulletList, OrderedList, ListItem, Blockquote, CodeBlock],
           editorProps: { attributes: { class: 'editor' } }
         },
     [provider]
@@ -75,6 +89,11 @@ function App() {
         <button onClick={() => editor?.chain().focus().setTextAlign('left').run()}>Left</button>
         <button onClick={() => editor?.chain().focus().setTextAlign('center').run()}>Center</button>
         <button onClick={() => editor?.chain().focus().setTextAlign('right').run()}>Right</button>
+        <button onClick={() => editor?.chain().focus().toggleBulletList().run()}>Bullets</button>
+        <button onClick={() => editor?.chain().focus().toggleOrderedList().run()}>Numbers</button>
+        <button onClick={() => editor?.chain().focus().toggleBlockquote().run()}>Quote</button>
+        <button onClick={() => editor?.chain().focus().toggleCodeBlock().run()}>Code</button>
+        <input type="color" onChange={(e) => editor?.chain().focus().setColor(e.target.value).run()} title="Text color" />
         <button onClick={() => editor?.chain().focus().undo().run()}>Undo</button>
         <button onClick={() => editor?.chain().focus().redo().run()}>Redo</button>
       </div>
