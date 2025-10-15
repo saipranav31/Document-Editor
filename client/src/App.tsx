@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import Underline from '@tiptap/extension-underline'
+import TextAlign from '@tiptap/extension-text-align'
+import Link from '@tiptap/extension-link'
 import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket'
 import Collaboration from '@tiptap/extension-collaboration'
@@ -28,12 +31,15 @@ function App() {
       ? {
           extensions: [
             StarterKit.configure({ history: false }),
+            Underline,
+            Link.configure({ openOnClick: true }),
+            TextAlign.configure({ types: ['heading', 'paragraph'] }),
             Collaboration.configure({ document: ydoc }) as any
           ],
           editorProps: { attributes: { class: 'editor' } }
         }
       : {
-          extensions: [StarterKit],
+          extensions: [StarterKit, Underline, Link, TextAlign],
           editorProps: { attributes: { class: 'editor' } }
         },
     [provider]
@@ -60,10 +66,15 @@ function App() {
 
   return (
     <div style={{ height: '100vh', boxSizing: 'border-box', padding: 16 }}>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12, position: 'sticky', top: 0, background: 'var(--bg, transparent)', paddingBottom: 8 }}>
+      <h1 style={{ margin: '0 0 12px' }}>Document Editor</h1>
+      <div style={{ display: 'flex', gap: 8, marginBottom: 12, position: 'sticky', top: 0, background: 'var(--bg, transparent)', paddingBottom: 8, flexWrap: 'wrap' }}>
         <button onClick={() => editor?.chain().focus().toggleBold().run()}>Bold</button>
         <button onClick={() => editor?.chain().focus().toggleItalic().run()}>Italic</button>
+        <button onClick={() => editor?.chain().focus().toggleUnderline().run()}>Underline</button>
         <button onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}>H2</button>
+        <button onClick={() => editor?.chain().focus().setTextAlign('left').run()}>Left</button>
+        <button onClick={() => editor?.chain().focus().setTextAlign('center').run()}>Center</button>
+        <button onClick={() => editor?.chain().focus().setTextAlign('right').run()}>Right</button>
         <button onClick={() => editor?.chain().focus().undo().run()}>Undo</button>
         <button onClick={() => editor?.chain().focus().redo().run()}>Redo</button>
       </div>

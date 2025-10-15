@@ -10,6 +10,9 @@
     "preview": "vite preview --host 127.0.0.1 --port 5173"
   },
   "dependencies": {
+    "@tiptap/extension-link": "^2.5.8",
+    "@tiptap/extension-text-align": "^2.5.8",
+    "@tiptap/extension-underline": "^2.5.8",
     "@tiptap/extension-collaboration": "^2.5.8",
     "@tiptap/pm": "^2.5.8",
     "@tiptap/react": "^2.5.8",
