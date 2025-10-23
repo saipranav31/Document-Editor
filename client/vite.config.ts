@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // Important for GitHub Pages when the site is served under /<repo-name>/
-  base: '/Document_-Editor/',
+  base: '/Document-Editor/',
   server: {
     host: '0.0.0.0',
     port: 5175,
