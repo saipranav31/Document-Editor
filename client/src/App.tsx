@@ -21,9 +21,6 @@ import { WS_URL, URLS } from './config'
 
 function App() {
   const [roomId] = useState('doc-1')
-
-  const [initError, setInitError] = useState<string | null>(null)
-  const [dbStatus, setDbStatus] = useState<'connected' | 'disconnected' | 'unknown'>('unknown')
   const ydoc = useMemo(() => new Y.Doc(), [])
   const provider = useMemo(() => {
     if (!WS_URL) {
@@ -72,18 +69,16 @@ function App() {
           const isEmpty = JSON.stringify(editor.getJSON()) === JSON.stringify({ type: 'doc', content: [{ type: 'paragraph' }] })
           if (isEmpty) editor.commands.setContent(doc.content, false)
         }
-        setDbStatus('connected')
       })
       .catch((err) => {
         console.warn('Database not available, using in-memory storage:', err)
-        setDbStatus('disconnected')
       })
     const interval = setInterval(() => {
       const json = editor?.getJSON()
       if (json) {
         saveDocument(roomId, json)
-          .then(() => setDbStatus('connected'))
-          .catch(() => setDbStatus('disconnected'))
+          .then(() => {})
+          .catch(() => {})
       }
     }, 3000)
     return () => {
