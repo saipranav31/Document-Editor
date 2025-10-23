@@ -16,14 +16,12 @@ app.use('/api/documents', documentsRouter);
 const port = process.env.PORT ? Number(process.env.PORT) : 4000;
 const server = http.createServer(app);
 startRealtimeServer(server);
-connectToDatabase()
-    .then(() => {
-    server.listen(port, () => {
-        console.log(`server listening on http://localhost:${port}`);
-    });
-})
-    .catch((err) => {
-    console.error('failed to connect to MongoDB', err);
-    process.exit(1);
+// Start server regardless of DB availability; attempt DB connect in background
+server.listen(port, '0.0.0.0', () => {
+    console.log(`server listening on http://0.0.0.0:${port}`);
+    console.log(`Access from phone: http://192.168.10.39:${port}`);
+});
+connectToDatabase().catch((err) => {
+    console.error('failed to connect to MongoDB (server still running)', err);
 });
 //# sourceMappingURL=index.js.map

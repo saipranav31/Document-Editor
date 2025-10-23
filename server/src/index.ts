@@ -23,8 +23,9 @@ const server = http.createServer(app);
 startRealtimeServer(server);
 
 // Start server regardless of DB availability; attempt DB connect in background
-server.listen(port, () => {
-	console.log(`server listening on http://localhost:${port}`);
+server.listen(port, '0.0.0.0', () => {
+	console.log(`server listening on http://0.0.0.0:${port}`);
+	console.log(`Access from phone: http://192.168.10.39:${port}`);
 });
 
 connectToDatabase().catch((err) => {

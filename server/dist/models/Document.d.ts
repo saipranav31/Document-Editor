@@ -4,18 +4,18 @@ declare const DocumentSchema: mongoose.Schema<any, mongoose.Model<any, any, any,
     timestamps: true;
 }, {
     key: string;
-    updatedAt: NativeDate;
     content: any;
+    updatedAt: NativeDate;
 } & mongoose.DefaultTimestampProps, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     key: string;
-    updatedAt: NativeDate;
     content: any;
+    updatedAt: NativeDate;
 } & mongoose.DefaultTimestampProps>, {}, mongoose.ResolveSchemaOptions<{
     timestamps: true;
 }>> & mongoose.FlatRecord<{
     key: string;
-    updatedAt: NativeDate;
     content: any;
+    updatedAt: NativeDate;
 } & mongoose.DefaultTimestampProps> & {
     _id: mongoose.Types.ObjectId;
 } & {
@@ -24,16 +24,16 @@ declare const DocumentSchema: mongoose.Schema<any, mongoose.Model<any, any, any,
 export type DocumentModel = InferSchemaType<typeof DocumentSchema>;
 export declare const Document: mongoose.Model<{
     key: string;
-    updatedAt: NativeDate;
     content: any;
+    updatedAt: NativeDate;
 } & mongoose.DefaultTimestampProps, {}, {}, {}, mongoose.Document<unknown, {}, {
     key: string;
-    updatedAt: NativeDate;
     content: any;
+    updatedAt: NativeDate;
 } & mongoose.DefaultTimestampProps, {}, {}> & {
     key: string;
-    updatedAt: NativeDate;
     content: any;
+    updatedAt: NativeDate;
 } & mongoose.DefaultTimestampProps & {
     _id: mongoose.Types.ObjectId;
 } & {

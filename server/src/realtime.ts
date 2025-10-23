@@ -1,4 +1,5 @@
-import { setupWSConnection } from 'y-websocket/bin/utils';
+import pkg from 'y-websocket/bin/utils';
+const { setupWSConnection } = pkg;
 import type { Server as HTTPServer, IncomingMessage } from 'http';
 import { WebSocketServer, WebSocket } from 'ws';
 
