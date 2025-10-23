@@ -16,8 +16,8 @@ import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket'
 import Collaboration from '@tiptap/extension-collaboration'
 // Removed CollaborationCursor to avoid runtime error when awareness is undefined
-import { loadDocument, saveDocument } from './api'
-import { WS_URL, URLS } from './config'
+import { loadDocument, saveDocument } from './api.js';
+import { WS_URL, URLS } from './config.js';
 
 function App() {
   const [roomId] = useState('doc-1')
@@ -70,7 +70,7 @@ function App() {
           if (isEmpty) editor.commands.setContent(doc.content, false)
         }
       })
-      .catch((err) => {
+      .catch((err: Error) => {
         console.warn('Database not available, using in-memory storage:', err)
       })
     const interval = setInterval(() => {
